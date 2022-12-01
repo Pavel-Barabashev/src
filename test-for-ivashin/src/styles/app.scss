@@ -1,0 +1,30 @@
+body{
+    background-color: rgb(46, 29, 13);
+}
+
+.entry-creation-form-container{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.entry-creation-form{
+    textarea{
+        border: none;
+        border-radius: 10px;
+        background-color: black;
+        color: antiquewhite;
+    }
+    input{
+        border-radius: 10px;
+        border: none;
+        background-color: white;
+        color: black;
+    }
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    
+}
