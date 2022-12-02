@@ -76,6 +76,9 @@ button:active{
         transition: 0.3s;
         background-color: gray
     }
+    input:disabled{
+        background-color: gray
+    }
     display: flex;
     flex-direction: column;
     width: 30%;

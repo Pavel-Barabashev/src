@@ -29,6 +29,12 @@ function App() {
     return axios.put(entriesUrl, editedEntry);
   }
 
+  function deleteEntry(id: string) {
+    return axios.delete(entriesUrl, { data: { id } }).then((response) => {
+      return response;
+    });
+  }
+
   function getEntries() {
     return axios.get(entriesUrl).then((response: AxiosResponse) => {
       return response.data;
@@ -77,7 +83,15 @@ function App() {
               >
                 edit
               </button>
-              <button>delete</button>
+              <button
+                onClick={() => {
+                  deleteEntry(entry.id).then((response) => {
+                    console.log(response);
+                  });
+                }}
+              >
+                delete
+              </button>
             </div>
           ))}
       </div>
@@ -86,7 +100,9 @@ function App() {
           className="entry-edit-form"
           onSubmit={(event) => {
             event.preventDefault();
-            updateEntry();
+            updateEntry().then((response) => {
+              console.log(response);
+            });
           }}
         >
           <textarea

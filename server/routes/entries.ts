@@ -1,10 +1,15 @@
 import { Request, Response } from "express";
 import * as fs from "fs";
+import { Entry } from "../types";
 export function getEntries() {
   return (req: Request, res: Response) => {
     let entries = fs.readFileSync("entries.json");
     res.status(200).send(entries);
   };
+}
+
+function writeEditedEntries(entries: Array<Entry>) {
+  fs.writeFileSync("entries.json", JSON.stringify(entries));
 }
 
 export function writeEntry() {
@@ -15,7 +20,7 @@ export function writeEntry() {
     let entries = JSON.parse(stringEntries);
     entries.push(req.body);
 
-    fs.writeFileSync("entries.json", JSON.stringify(entries));
+    writeEditedEntries(entries);
     res.status(200).send();
   };
 }
@@ -26,9 +31,10 @@ export function updateEntry() {
     let buffEntries = fs.readFileSync("entries.json");
     let stringEntries = buffEntries.toString();
     let entries = JSON.parse(stringEntries);
-    console.log(entries);
-
-    // fs.writeFileSync("entries.json", JSON.stringify(entries));
+    entries.map((entry: Entry) => {
+      entry.id === req.body.id && (entry.text = req.body.text);
+    });
+    writeEditedEntries(entries);
     res.status(200).send();
   };
 }
@@ -39,8 +45,11 @@ export function deleteEntry() {
     let buffEntries = fs.readFileSync("entries.json");
     let stringEntries = buffEntries.toString();
     let entries = JSON.parse(stringEntries);
-
-    console.log(entries);
+    let objWithIdIndex = entries.findIndex(
+      (entry: Entry) => entry.id === req.body.id
+    );
+    entries.splice(objWithIdIndex, 1);
+    writeEditedEntries(entries);
     res.status(200).send();
   };
 }
