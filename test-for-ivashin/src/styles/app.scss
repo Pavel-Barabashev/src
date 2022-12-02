@@ -10,6 +10,8 @@ body{
     justify-content: center;
 }
 
+
+
 .entry-creation-form{
     textarea{
         border: none;
@@ -27,4 +29,55 @@ body{
     flex-direction: column;
     width: 40%;
     
+}
+
+
+.entries-container{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    
+}
+
+
+.entry-item{
+    color: antiquewhite;
+    display: flex;
+   
+    background-color: gray;
+    border: solid 1px black;
+    border-radius: 10px;
+    flex-direction: column;
+    align-items: center;
+button{
+    border-radius: 10px;
+    width: 40%;
+    border: solid 1px black;
+    background-color: white;
+    color: black;
+}
+button:active{
+    transition: 0.3s;
+    background-color: gray
+}
+}
+
+.entry-edit-form{
+    textarea{
+        border: none;
+        border-radius: 10px;
+    }
+     input{
+        border-radius: 10px;
+        border: solid 1px black;
+        background-color: white;
+        color: black;
+    }
+    input:active{
+        transition: 0.3s;
+        background-color: gray
+    }
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    justify-content: baseline;
 }
